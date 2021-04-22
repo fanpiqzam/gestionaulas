@@ -1,0 +1,24 @@
+<odoo>
+  <data>
+    <!--Top menu item-->
+    <menuitem name="Gestión Aulas" id="gestion_aulas.menu_root"/>
+
+    <!--menu categories-->
+    <menuitem name="Gestión" id="gestion_aulas.menu_gestion" parent="gestion_aulas.menu_root"/>
+
+    <!--actions-->
+    <menuitem name="Aulas" id="gestion_aulas.menu_list_aulas" parent="gestion_aulas.menu_gestion"
+              action="gestion_aulas.action_window_aulas"/>
+    <menuitem name="Profesores" id="gestion_aulas.menu_list_profesores" parent="gestion_aulas.menu_gestion"
+              action="gestion_aulas.action_window_profesores"/>
+    <menuitem name="Reservas" id="gestion_aulas.menu_list_reservas" parent="gestion_aulas.menu_gestion"
+              action="gestion_aulas.action_window_reservas"/>
+    <menuitem name="Grupos" id="gestion_aulas.menu_list_grupos" parent="gestion_aulas.menu_gestion"
+              action="gestion_aulas.action_window_grupos"/>
+    <menuitem name="Asignaturas" id="gestion_aulas.menu_list_asignaturas" parent="gestion_aulas.menu_gestion"
+              action="gestion_aulas.action_window_asignaturas"/>
+    <menuitem name="Actividades" id="gestion_aulas.menu_list_actividades" parent="gestion_aulas.menu_gestion"
+              action="gestion_aulas.action_window_actividades"/>
+
+  </data>
+</odoo>
