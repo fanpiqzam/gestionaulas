@@ -1,22 +1,47 @@
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-<!--
+    <!--TREE-->
+    <record model="ir.ui.view" id="gestion_aulas.aulas_model_tree">
+      <field name="name">Aulas</field>
+      <field name="model">gestion_aulas.aulas_model</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="abreviatura"/>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- FORM -->
     <record model="ir.ui.view" id="gestion_aulas.aulas_form">
       <field name="name">Formulario aulas</field>
       <field name="model">gestion_aulas.aulas_model</field>
       <field name="arch" type="xml">
         <form>
           <sheet>
-            <group>
+            <group string="Datos aula">
               <field name="name"/>
               <field name="abreviatura"/>
+            </group>
+            <group string="Horarios y reservas">
+              <notebook>
+                <page string="Horarios"> 
+                  <field name="horario_id">
+                    <tree>
+                      <field name="grupo_id"/>
+                      <field name="asignatura_id"/>
+                    </tree>
+                  </field>
+                </page>
+                <page string="Reservas"> 
+                  <field name="reserva_id"/>
+                </page>
+              </notebook>
             </group>
           </sheet>
         </form>
       </field>
     </record>
--->
 
     <!-- actions opening views on models -->
 

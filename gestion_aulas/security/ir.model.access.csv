@@ -1,8 +1,10 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_gestion_aulas_aulas_model,gestion_aulas.aulas_model,model_gestion_aulas_aulas_model,,1,1,1,1
-access_gestion_aulas_profesor_model,gestion_aulas.profesor_model,model_gestion_aulas_profesor_model,,1,1,1,1
-access_gestion_aulas_reservas_model,gestion_aulas.reservas_model,model_gestion_aulas_reservas_model,,1,1,1,1
-access_gestion_aulas_actividades_model,gestion_aulas.actividades_model,model_gestion_aulas_actividades_model,,1,1,1,1
-access_gestion_aulas_asignaturas_model,gestion_aulas.asignaturas_model,model_gestion_aulas_asignaturas_model,,1,1,1,1
-access_gestion_aulas_tramo_model,gestion_aulas.tramo_model,model_gestion_aulas_tramo_model,,1,1,1,1
+access_gestion_aulas_reserva_model,gestion_aulas.reserva_model,model_gestion_aulas_reserva_model,,1,1,1,1
+access_gestion_aulas_horario_model,gestion_aulas.horario_model,model_gestion_aulas_horario_model,,1,1,1,1
 access_gestion_aulas_grupo_model,gestion_aulas.grupo_model,model_gestion_aulas_grupo_model,,1,1,1,1
+access_gestion_aulas_asignatura_model,gestion_aulas.asignatura_model,model_gestion_aulas_asignatura_model,,1,1,1,1
+access_gestion_aulas_tramo_model,gestion_aulas.tramo_model,model_gestion_aulas_tramo_model,,1,1,1,1
+access_gestion_aulas_profesor_model,gestion_aulas.profesor_model,model_gestion_aulas_profesor_model,,1,1,1,1
+access_gestion_aulas_importacion_wizard,gestion_aulas.importacion_wizard,model_gestion_aulas_importacion_wizard,,1,1,1,1
+access_gestion_aulas_borrar_wizard,gestion_aulas.borrar_wizard,model_gestion_aulas_borrar_wizard,,1,1,1,1

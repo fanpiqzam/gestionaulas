@@ -1,0 +1,50 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    
+    <!--TREE-->
+    <record model="ir.ui.view" id="gestion_aulas.tramo_model_tree">
+      <field name="name">Tramos</field>
+      <field name="model">gestion_aulas.tramo_model</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="numero"/>
+          <field name="hora"/>
+          <field name="dia"/>
+        </tree>
+      </field>
+    </record>
+    <!--FORM-->
+    <record model="ir.ui.view" id="gestion_aulas.tramo_form">
+      <field name="name">Formulario tramos</field>
+      <field name="model">gestion_aulas.tramo_model</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group string="Datos tramo">
+              <field name="numero"/>
+              <field name="dia" readonly="1"/>
+              <field name="hora" readonly="1"/>
+            </group>
+            <group>
+              <notebook>
+                <page string="Horarios">
+                  <field name="horario_id"/>
+                </page>
+              </notebook>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="gestion_aulas.action_window_tramo">
+      <field name="name">Tramos</field>
+      <field name="res_model">gestion_aulas.tramo_model</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+  </data>
+</odoo>

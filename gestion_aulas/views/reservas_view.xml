@@ -2,54 +2,74 @@
   <data>
     <!-- explicit list view definition -->
 
-<!--
+    <!--SEARCH-->
+    <!--    <record model="ir.ui.view" id="gestion_aulas.reserva_search">
+      <field name="name">Filtros de reservas</field>
+      <field name="model">gestion_aulas.reserva_model</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="aula_id"/>
+          <filter string="Audiovisuales" name="aula_id" domain="[('name','=',AUDIOVISUALES)]"/>
+        </search>
+      </field>
+    </record>
+    -->
+
+    <!--TREE-->
     <record model="ir.ui.view" id="gestion_aulas.reservas_tree">
       <field name="name">Reserva aulas</field>
-      <field name="model">gestion_aulas.reservas_model</field>
+      <field name="model">gestion_aulas.reserva_model</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="dia"/>
+          <field name="name"/>
+          <field name="aula_id"/>
+          <field name="profesor_id"/>
         </tree>
       </field>
     </record>
 
+    <!--FORM-->
     <record model="ir.ui.view" id="gestion_aulas.reservas_form">
       <field name="name">Formulario reservas</field>
-      <field name="model">gestion_aulas.reservas_model</field>
+      <field name="model">gestion_aulas.reserva_model</field>
       <field name="arch" type="xml">
         <form>
           <sheet>
-            <group>
-              <field name="dia" widget="date"/>
-              <field name="profesor_id"/>
+            <group string="Datos de la reserva">
+              <field name="name"/>
               <field name="aula_id"/>
-              <field name="estado"/>
-              <field name="tramo_id"/>
-              <field name="descripcion"/>
+              <field name="profesor_id"/>
+              <field name="dia"/>
+              <field name="hora"/>
+              <field name="fecha_fin"/>
+            </group>
+            <group>
+              <field name="periodica"/>
+              <field name="fecha_fin_peri"/>              
             </group>
           </sheet>
         </form>
       </field>
     </record>
--->
+
     <!-- CALENDAR -->
-    <!--<record id="gestion_aulas_reserva_calendar" model="ir.ui.view"> 
+    <record id="gestion_aulas_reserva_calendar" model="ir.ui.view"> 
       <field name="name">Reserva de aulas</field>
-      <field name="model">gestion_aulas.reservas_model</field>
+      <field name="model">gestion_aulas.reserva_model</field>
       <field name="arch" type="xml">
-        <calendar string="Reserva aula" date_start="dia" event_open_popup="true" mode="week" color="aula_id" quick_add="False">
+        <calendar string="Reserva aula" date_start="dia" date_stop="fecha_fin" event_open_popup="true" mode="week" color="aula_id" quick_add="False">
           <field name="aula_id"/>
           <field name="profesor_id"/>
         </calendar>
       </field>
-    </record>-->
+    </record>
 
     <!-- actions opening views on models -->
 
     <record model="ir.actions.act_window" id="gestion_aulas.action_window_reservas">
       <field name="name">Reservas</field>
-      <field name="res_model">gestion_aulas.reservas_model</field>
-      <field name="view_mode">tree,form</field>
+      <field name="res_model">gestion_aulas.reserva_model</field>
+      <field name="view_mode">calendar,tree,form</field>
     </record>
 
 

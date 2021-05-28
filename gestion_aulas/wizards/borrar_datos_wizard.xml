@@ -1,0 +1,30 @@
+<odoo>
+    <record model="ir.ui.view" id="gestion_aulas.borrar_wizard_form">
+        <field name="name">Eliminar datos</field>
+        <field name="model">gestion_aulas.borrar_wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Datos de la BBDD">
+                        <field name="host"/>
+                        <field name="database"/>
+                        <field name="usuario"/>
+                        <field name="contrasenya" password="True"/>
+                    </group>
+                    <footer>
+                        <button name="borrar_datos" string="Eliminar" class="btn btn-danger o_form_button_delete" confirm="¿EStá seguro de que desea eliminar todos los datos?" type="object"/>
+                        <button string="Cancel" class="btn_secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="gestion_aulas.action_window_wizard_borrar" model="ir.actions.act_window">
+        <field name="name">Eliminar datos</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">gestion_aulas.borrar_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="gestion_aulas.borrar_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

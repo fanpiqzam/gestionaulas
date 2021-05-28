@@ -1,0 +1,35 @@
+<odoo>
+    <record model="ir.ui.view" id="gestion_aulas.importacion_wizard_form">
+        <field name="name">Importación de datos</field>
+        <field name="model">gestion_aulas.importacion_wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Datos de la BBDD">
+                        <field name="host"/>
+                        <field name="database"/>
+                        <field name="usuario"/>
+                        <field name="contrasenya" password="True"/>
+                    </group>
+                    <group string="Archivo XML">
+                        <field name="name" invisible="1"/>
+                        <field name="archivo" file_name="file_name"/>
+                        <field name="fin_curso"/>
+                    </group>
+                    <footer>
+                        <button name="importar_datos" string="Importar" class="btn btn-primary" type="object"/>
+                        <button string="Cancel" class="btn_secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="gestion_aulas.action_window_wizard" model="ir.actions.act_window">
+        <field name="name">Importación datos</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">gestion_aulas.importacion_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="gestion_aulas.importacion_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>
