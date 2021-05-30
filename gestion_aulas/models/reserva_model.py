@@ -5,6 +5,7 @@ from datetime import date, timedelta
 from datetime import datetime
 import logging
 import calendar
+import pytz
 from odoo.exceptions import ValidationError
 from odoo.tools.date_utils import date_range
 _logger = logging.getLogger(__name__)
@@ -26,44 +27,49 @@ class reserva_model(models.Model):
     profesor_id = fields.Many2one("res.users",default=lambda self:self.env.user and self.env.user.id or False, string="Profesor")
     fecha_fin = fields.Datetime(string="Fin", compute='_get_fecha',store=True,readonly=True)
     
-    periodica = fields.Boolean(string="Reserva periódica")
+    periodica = fields.Boolean(string="Reserva periódica", default=False)
     fecha_fin_peri = fields.Datetime(string="Hasta fecha")
 
     @api.depends("dia","hora")
-    def _get_fecha(self):
+    def _get_fecha(self):    
         if self.dia and self.hora:
+            #user_tz = self.env.user.tz or pytz.utc
+            #local = pytz.timezone(user_tz)
             tmp = str(self.dia).split(" ")[0] + ' ' + str(self.hora)+":00" 
             self.dia = tmp
+            #self.dia = datetime.strftime(pytz.utc.localize(datetime.strptime(tmp, "%Y-%m-%d %H:%M:%S")).astimezone(local))
             self.fecha_fin = self.dia + timedelta(minutes=55)
 
-    @api.onchange("periodica")
-    def _reserva_periodica(self):
-        if self.periodica == True:
-            dia_sig = self.dia
-            _logger.info(dia_sig)
-            for d in date_range(self.dia, self.fecha_fin_peri):
-                self.env['gestion_aula.reserva_model'].create({
-                        'name' : d.name,
-                        'aula_id' : d.aula_id,
-                        'dia' : dia_sig,
-                        'hora' : d.hora,
-                        'profesor_id' : d.profesor_id,
-                        'fecha_fin' : d.fecha_fin,
-                        'periodica' : True,
-                        'fecha_fin_peri' : d.fecha_fin_peri
-                })
-                _logger.info(d.dia_sig)
-                _logger.info(d.aula_id)
-                dia_sig = self.dia + timedelta(days=7)
+    """@api.onchange('fecha_fin_peri')
+    def create(self):
+        for record in self:
+            if record.periodica == True:
+                dia_sig = record.dia
                 _logger.info(dia_sig)
-        else:
-            return None
+                while dia_sig <= record.fecha_fin_peri:
+                    record = record.env['gestion_aula.reserva_model'].create({
+                            'name' : record.name,
+                            'aula_id' : record.aula_id,
+                            'dia' : dia_sig,
+                            'hora' : record.hora,
+                            'profesor_id' : record.profesor_id,
+                            'fecha_fin' : record.fecha_fin,
+                            'periodica' : True,
+                            'fecha_fin_peri' : record.fecha_fin_peri
+                    })
+                    _logger.info(dia_sig)
+                    _logger.info(self.aula_id)
+                    dia_sig = self.dia + timedelta(days=7)
+                    _logger.info(dia_sig)
+                    return record
+            else:
+                return None"""
     
     @api.constrains('dia')
     def _checkDate(self):
         hoy = datetime.today()
         if (self.dia < hoy):
-            raise ValidationError("La fecha y hora no pueden ser anteriores a la fecha y hora actual.")
+            raise ValidationError("La fecha y hora no pueden ser anteriores a la fecha y hora actuales.")
 
     #def _get_tramo(self):
     #    day_of_week = calendar.day_name[self.dia.weekday()]

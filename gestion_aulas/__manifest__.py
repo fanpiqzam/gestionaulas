@@ -23,6 +23,7 @@
 
     # always loaded
     'data': [
+        'security/gestion_aulas_security.xml',
         'security/ir.model.access.csv',
         'views/tramo_view.xml',
         'views/reservas_view.xml',

@@ -3,17 +3,19 @@
     <!-- explicit list view definition -->
 
     <!--SEARCH-->
-    <!--    <record model="ir.ui.view" id="gestion_aulas.reserva_search">
+    <record model="ir.ui.view" id="gestion_aulas.reserva_search">
       <field name="name">Filtros de reservas</field>
       <field name="model">gestion_aulas.reserva_model</field>
       <field name="arch" type="xml">
         <search>
           <field name="aula_id"/>
-          <filter string="Audiovisuales" name="aula_id" domain="[('name','=',AUDIOVISUALES)]"/>
+          <filter string="Audiovisuales" name="aula_audio" domain="[('aula_id.name','=','AUDIOVISUALES')]"/>
+          <filter string="Info1" name="info1" domain="[('aula_id.name','=','Info1')]"/>
+          <filter string="Info2" name="info2" domain="[('aula_id.name','=','Info2')]"/>
+          <filter string="Info3" name="info3" domain="[('aula_id.name','=','Info3')]"/>
         </search>
       </field>
     </record>
-    -->
 
     <!--TREE-->
     <record model="ir.ui.view" id="gestion_aulas.reservas_tree">
@@ -44,8 +46,8 @@
               <field name="fecha_fin"/>
             </group>
             <group>
+              <field name="fecha_fin_peri"/>
               <field name="periodica"/>
-              <field name="fecha_fin_peri"/>              
             </group>
           </sheet>
         </form>

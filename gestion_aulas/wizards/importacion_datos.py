@@ -2,6 +2,9 @@ import logging
 from xml.dom import minidom
 from odoo.exceptions import ValidationError
 import psycopg2
+import datetime
+from datetime import timedelta
+import calendar
 _logger = logging.getLogger(__name__)
 
 def insertar_asignaturas(archivo, host, db, usuario, contrasenya):
@@ -165,6 +168,7 @@ def insert_horario(archivo, host, db, usuario, contrasenya):
 
         mydoc = minidom.parse(archivo)
         items = mydoc.getElementsByTagName('HORARIO_GRUP')
+        
         
         for elem in items:
             grupo_id = elem.attributes['hor_num_int_gr'].value
