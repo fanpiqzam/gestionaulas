@@ -10,13 +10,13 @@
 
     <!--actions-->
     <menuitem name="Aulas" id="gestion_aulas.menu_list_aulas" parent="gestion_aulas.menu_gestion"
-              action="gestion_aulas.action_window_aulas" groups="gestion_aulas.gestion_aulast_group_prof"/>
-    <menuitem name="Horarios" id="gestion_aulas.menu_list_actividades" parent="gestion_aulas.menu_gestion"
-              action="gestion_aulas.action_window_horario" groups="gestion_aulas.gestion_aulast_group_prof"/>
+              action="gestion_aulas.action_window_aulas" groups="gestion_aulas.gestion_aulast_group_prof"/>    
     <menuitem name="Grupos" id="gestion_aulas.menu_list_grupos" parent="gestion_aulas.menu_gestion"
               action="gestion_aulas.action_window_grupos" groups="gestion_aulas.gestion_aulast_group_prof"/>
     <menuitem name="Asignaturas" id="gestion_aulas.menu_list_asignaturas" parent="gestion_aulas.menu_gestion"
               action="gestion_aulas.action_window_asignaturas" groups="gestion_aulas.gestion_aulast_group_prof"/>
+    <menuitem name="Horarios" id="gestion_aulas.menu_list_actividades" parent="gestion_aulas.menu_gestion"
+              action="gestion_aulas.action_window_horario" groups="gestion_aulas.gestion_aulast_group_prof"/>
     <menuitem name="Profesores" id="gestion_aulas.menu_list_profesores" parent="gestion_aulas.menu_gestion"
               action="gestion_aulas.action_window_profesores" groups="gestion_aulas.gestion_aulast_group_adm"/>
     <menuitem name="Tramos" id="gestion_aulas.menu_list_tramos" parent="gestion_aulas.menu_gestion"

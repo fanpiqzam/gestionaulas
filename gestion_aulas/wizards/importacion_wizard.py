@@ -15,7 +15,7 @@ class importacion_wizard(models.TransientModel):
     contrasenya = fields.Char(string="Contraseña", required=True)
     host = fields.Char(string="Host", required=True)
     database = fields.Char(string="Base de datos", required=True)
-    fin_curso = fields.Datetime(string="Final de curso")
+    fin_curso = fields.Datetime(string="Final de curso", required=True)
 
 
     @api.constrains('archivo')
@@ -31,3 +31,4 @@ class importacion_wizard(models.TransientModel):
         importacion_datos.insert_profesores(BytesIO(file_to_decode), self.host, self.database, self.usuario, self.contrasenya)
         importacion_datos.insert_tramos(BytesIO(file_to_decode), self.host, self.database, self.usuario, self.contrasenya)
         importacion_datos.insert_horario(BytesIO(file_to_decode), self.host, self.database, self.usuario, self.contrasenya)
+        importacion_datos.insert_horario_reservas(BytesIO(file_to_decode), self.host, self.database, self.usuario, self.contrasenya,self.fin_curso)

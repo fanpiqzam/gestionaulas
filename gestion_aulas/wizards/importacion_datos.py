@@ -1,3 +1,4 @@
+from inspect import trace
 import logging
 from xml.dom import minidom
 from odoo.exceptions import ValidationError
@@ -184,6 +185,99 @@ def insert_horario(archivo, host, db, usuario, contrasenya):
                     cur.execute(postgres_insert_hr,record_to_insert)
                     conn. commit()
                     count = cur.rowcount
+    except (Exception, psycopg2.Error) as error:
+        raise ValidationError(error)
+    finally:
+        if conn:
+            cur.close()
+            conn.close()
+
+def insert_horario_reservas(archivo, host, db, usuario, contrasenya, fecha_fin_curso):
+    try:
+        conn = None
+        conn = psycopg2.connect(host=host, database=db, user=usuario, password=contrasenya)
+        cur = conn.cursor()
+        postgres_insert_hr = """INSERT INTO gestion_aulas_reserva_model (name,aula_id,dia,hora,fecha_fin) VALUES (%s,%s,%s,%s,%s) ON CONFLICT (aula_id,dia) DO NOTHING"""
+
+        mydoc = minidom.parse(archivo)        
+        items = mydoc.getElementsByTagName('HORARIO_GRUP')
+
+        horas_dia = {
+            1:"06:00",2:"06:55",3:"07:50",4:"08:45",5:"09:15",6:"10:10",7:"11:05",8:"12:00",9:"12:55",
+            10:"06:00",11:"06:55",12:"07:50",13:"08:45",14:"09:15",15:"10:10",16:"11:05",17:"12:00",18:"12:55",
+            19:"06:00",20:"06:55",21:"07:50",22:"08:45",23:"09:15",24:"10:10",25:"11:05",26:"12:00",27:"12:55",
+            28:"06:00",29:"06:55",30:"07:50",31:"08:45",32:"09:15",33:"10:10",34:"11:05",35:"12:00",36:"12:55",
+            37:"06:00",38:"06:55",39:"07:50",40:"08:45",41:"09:15",42:"10:10",43:"11:05",44:"12:00",45:"12:55",
+        }
+        dia = ""
+
+        my_date = datetime.datetime.today()
+
+        while my_date <= fecha_fin_curso:
+            for elem in items:
+                for act in elem.childNodes:
+                    if type(act)==minidom.Element:
+                        tramo_id = int(act.attributes['tramo'].value)
+                        aula_id = act.attributes['aula'].value
+                        hora = horas_dia[tramo_id]
+                        if tramo_id in range(1,10) and calendar.day_name[my_date.weekday()] == "lunes":
+                            hora = horas_dia[tramo_id]
+                            tmp = str(my_date).split(" ")[0] + ' ' + str(hora)+":00"
+                            my_date = datetime.datetime.strptime(tmp, '%Y-%m-%d %H:%M:%S')
+                            fecha_fin = my_date + timedelta(minutes=55)
+
+                            record_to_insert = ("Horario fijo",aula_id,my_date,hora,fecha_fin)
+                            _logger.info(record_to_insert)
+                            _logger.info(postgres_insert_hr)
+                            cur.execute(postgres_insert_hr,record_to_insert)
+                            conn. commit()
+                            count = cur.rowcount
+                        if tramo_id in range(10,19) and calendar.day_name[my_date.weekday()] == "martes":
+                            hora = horas_dia[tramo_id]
+
+                            tmp = str(my_date).split(" ")[0] + ' ' + str(hora)+":00"
+                            my_date = datetime.datetime.strptime(tmp, '%Y-%m-%d %H:%M:%S')
+                            fecha_fin = my_date + timedelta(minutes=55)
+
+                            record_to_insert = ("Horario fijo",aula_id,my_date,hora,fecha_fin)
+                            cur.execute(postgres_insert_hr,record_to_insert)
+                            conn. commit()
+                            count = cur.rowcount
+                        if tramo_id in range(19,28) and calendar.day_name[my_date.weekday()] == "miércoles":
+                            hora = horas_dia[tramo_id]
+
+                            tmp = str(my_date).split(" ")[0] + ' ' + str(hora)+":00"
+                            my_date = datetime.datetime.strptime(tmp, '%Y-%m-%d %H:%M:%S')
+                            fecha_fin = my_date + timedelta(minutes=55)
+
+                            record_to_insert = ("Horario fijo",aula_id,my_date,hora,fecha_fin)
+                            cur.execute(postgres_insert_hr,record_to_insert)
+                            conn. commit()
+                            count = cur.rowcount
+                        if tramo_id in range(28,37) and calendar.day_name[my_date.weekday()] == "jueves":
+                            hora = horas_dia[tramo_id]
+
+                            tmp = str(my_date).split(" ")[0] + ' ' + str(hora)+":00"
+                            my_date = datetime.datetime.strptime(tmp, '%Y-%m-%d %H:%M:%S')
+                            fecha_fin = my_date + timedelta(minutes=55)
+
+                            record_to_insert = ("Horario fijo",aula_id,my_date,hora,fecha_fin)
+                            cur.execute(postgres_insert_hr,record_to_insert)
+                            conn. commit()
+                            count = cur.rowcount
+                        if tramo_id in range(37,46) and calendar.day_name[my_date.weekday()] == "viernes":
+                            hora = horas_dia[tramo_id]
+
+                            tmp = str(my_date).split(" ")[0] + ' ' + str(hora)+":00"
+                            my_date = datetime.datetime.strptime(tmp, '%Y-%m-%d %H:%M:%S')
+                            fecha_fin = my_date + timedelta(minutes=55)
+
+                            record_to_insert = ("Horario fijo",aula_id,my_date,hora,fecha_fin)
+                            cur.execute(postgres_insert_hr,record_to_insert)
+                            conn. commit()
+                            count = cur.rowcount
+            my_date += timedelta(days=1)
+
     except (Exception, psycopg2.Error) as error:
         raise ValidationError(error)
     finally:

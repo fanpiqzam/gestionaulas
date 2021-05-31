@@ -2,26 +2,20 @@
   <data>    
     <!--TREE-->
     <record model="ir.ui.view" id="gestion_aulas.horario_model_tree">
-      <field name="name">Asignaturas</field>
+      <field name="name">Horario</field>
       <field name="model">gestion_aulas.horario_model</field>
       <field name="arch" type="xml">
         <tree>
           <field name="grupo_id"/>
           <field name="aula_id"/>
           <field name="asignatura_id"/>
-          <field name="tramo_id">
-            <tree>
-              <field name="dia"/>
-              <field name="hora"/>
-            </tree>
-          </field>
         </tree>
       </field>
     </record>
 
     <!--FORM-->
-    <record model="ir.ui.view" id="gestion_aulas.asignatura_form">
-      <field name="name">Formulario asignatura</field>
+    <record model="ir.ui.view" id="gestion_aulas.horario_form">
+      <field name="name">Formulario horario</field>
       <field name="model">gestion_aulas.horario_model</field>
       <field name="arch" type="xml">
         <form>

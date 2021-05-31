@@ -45,10 +45,6 @@
               <field name="hora"/>
               <field name="fecha_fin"/>
             </group>
-            <group>
-              <field name="fecha_fin_peri"/>
-              <field name="periodica"/>
-            </group>
           </sheet>
         </form>
       </field>
@@ -70,6 +66,7 @@
 
     <record model="ir.actions.act_window" id="gestion_aulas.action_window_reservas">
       <field name="name">Reservas</field>
+      <field name="context">{'search_default_aula_audio': 1}</field>
       <field name="res_model">gestion_aulas.reserva_model</field>
       <field name="view_mode">calendar,tree,form</field>
     </record>
